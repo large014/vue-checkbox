@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <CheckBox title="About start" description="Starting with your OS"/>
-    <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
+    <div class="checkBoxList">
+      <CheckBox class="boxsample" width="320px" title="About start" description="Starting with your OS" shadow_c="rgba(0,0,255,0.3)" circle_c="rgba(0,0,255,0.4)" checkbox_c="rgba(0,0,255,1)" box_c="rgba(0,0,255,0.8)"/>
+      <CheckBox class="boxsample" width="320px" title="Auto update" description="Download and install new version" shadow_c="rgba(50,220,40,0.3)" circle_c="rgba(50,220,40,0.4)" checkbox_c="rgba(50,220,40,1)" box_c="rgba(50,220,40,0.8)"/>
+      <CheckBox class="boxsample" width="320px" title="Don't check auth key" description="All connections will not be checked" shadow_c="rgba(255,198,0,0.3)" circle_c="rgba(255,198,0,0.4)" checkbox_c="rgba(255,198,0,1)" box_c="rgba(255,198,0,0.8)"/>
+      <CheckBox class="boxsample" width="320px" title="Success all" description="Everyone will be fine" shadow_c="rgba(255,0,0,0.3)" circle_c="rgba(255,0,0,0.4)" checkbox_c="rgba(255,0,0,1)" box_c="rgba(255,0,0,0.8)"/>
+    </div>
   </div>
 </template>
 
@@ -13,7 +17,10 @@ export default {
   name: 'app',
   components: {
     CheckBox
-    // HelloWorld
+  },
+  data(){
+    return{
+    }
   }
 }
 </script>
@@ -26,5 +33,15 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+.checkBoxList{
+  width: 335px;
+  margin: 0 auto;
+  /* display: flex; */
+  /* align-items: flex-start; */
+}
+.boxsample{
+  margin-bottom: 5px;
 }
 </style>

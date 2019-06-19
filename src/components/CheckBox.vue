@@ -1,9 +1,8 @@
 <template>
-  <div class="checkboxArea">
+  <div class="checkboxArea" :style="styles">
     <label>
       <input type='checkbox' class="checkbox"/>
       <div class="boxparts">
-        <!-- <span class="circle"></span> -->
         <span class="box"></span>
       </div>
       <div class="textArea">
@@ -18,8 +17,24 @@
 export default {
   name: 'HelloWorld',
   props: {
+    width: String,
     title: String,
-    description:String
+    description:String,
+    shadow_c:String,
+    circle_c:String,
+    checkbox_c:String,
+    box_c:String,
+  },
+  computed:{
+    styles(){
+      return{
+        '--width':this.width,
+        '--shadow_c':this.shadow_c,
+        '--circle_c':this.circle_c,
+        '--checkbox_c':this.checkbox_c,
+        '--box_c':this.box_c
+      }
+    }
   }
 }
 </script>
@@ -34,16 +49,25 @@ export default {
 }
 
 .checkboxArea{
+  //---- デフォルト値の設定
+  --width: 300px;
+  --shadow_c: rgba(0,0,255,0.3);
+  --circle_c: rgba(0,0,255,0.3);
+  --checkbox_c: rgba(0,0,255,0.5);
+  --box_c: rgba(0,0,255,0.3);
   position: relative;
-  display: inline-block;
+  // display: inline-block;
+  width: var(--width);
   border-radius: 4px;
-  padding: 20px;
+  padding: 15px 20px;
 }
 .checkboxArea:hover{
-  box-shadow: 0 0 6px rgba(0,0,255,0.3);
+  // box-shadow: 0 3px 6px rgba(0,0,255,0.3);
+  box-shadow: 0 2px 8px var(--shadow_c);
   .boxparts:before{
     opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+    transform: translate(-50%, -50%) scale(1);
+    transform-origin: 50% 50%;
   }
 }
 
@@ -54,33 +78,33 @@ export default {
 .boxparts{
   position: absolute;
   top: 50%;
-  left: 20px;
+  left: 2px;
   transform: translate(0%, -50%);
   display: inline-block;
   width:53px;
   height: 53px;
-  border: 1px solid #CCC;
 
   .box{
     position: absolute;
     top: 49.7%;
-    left: 50%;
+    left: 49.0%;
     transform: translate( calc(-50% + 0px), -50%);
-    width: 18px;
-    height: 18px;
-    border: 2px solid #999;
+    width: 19px;
+    height: 19px;
+    border: 2px solid var(--checkbox_c);
     border-radius: 3px;
     z-index: 1;
+    backface-visibility: hidden;
   }
   .box:before{
     content: '';
     position: absolute;
-    bottom: 25%; left: 40%;
+    bottom: 25%; left: 41%;
 
     font-size: 0em;
     width: .15em;
     height: .5em;
-    background-color: currentColor;
+    background-color: #fff;
 
     transform-origin: center bottom;
     transform:  translateX(-50%) scaleX(-1) rotate(-135deg) translateY(.5em); 
@@ -88,12 +112,12 @@ export default {
   .box:after{
     content: '';
     position: absolute;
-    bottom: 30%; left: 40%;
+    bottom: 30%; left: 41%;
 
     font-size: 0em;
     width: .15em;
     height: .94em;
-    background-color: currentColor;
+    background-color: #FFF;
 
     transform-origin: center bottom;
     transform: translateX(-50%) rotate(45deg) translate(.05em,.125em);
@@ -105,39 +129,44 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  // transform: translate(-50%, -50%);
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
-  background-color: aquamarine;
-  transition: opacity .1s linear, transform .1s linear;
+  background-color: var(--circle_c);
+  transition: opacity .05s linear, transform .1s linear;
   opacity: 0;
   transform-origin: 50% 50%;
   transform: translate(-50%, -50%) scale(0.6);
 }
 
+//--- チェックON
 .checkbox:checked + .boxparts .box:before{
   font-size: 0.5em;
-  animation:check_anim .1s linear both;
+  animation:check_anim .05s linear both;
 }
-
-
 .checkbox:checked + .boxparts .box:after{
   font-size: 0.5em;
-  animation: check_anim .1s .1s linear both;
+  animation: check_anim .05s .05s linear both;
+}
+.checkbox:checked + .boxparts .box{
+  background-color: var(--checkbox_c);
+}
+.checkbox:checked + .boxparts::before{
+  opacity: 0;
 }
 
 .textArea{
-  display: inline-block;
   text-align: left;
-  padding-left: 55px;
+  padding-left: 40px;
 }
 
 .title{
   font-weight: 600;
   margin-bottom: 5px;
+  user-select: none;
 }
 .description{
   color: #888;
+  user-select: none;
 }
 </style>
