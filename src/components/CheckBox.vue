@@ -1,7 +1,7 @@
 <template>
   <div class="checkboxArea" :style="styles">
     <label>
-      <input type='checkbox' class="checkbox"/>
+      <input type='checkbox' class="checkbox" v-model="checked" @click="onClick()" />
       <div class="boxparts">
         <span class="box"></span>
       </div>
@@ -16,6 +16,11 @@
 <script>
 export default {
   name: 'HelloWorld',
+  data(){
+    return{
+      checked: false
+    }
+  },
   props: {
     width: String,
     title: String,
@@ -34,6 +39,11 @@ export default {
         '--checkbox_c':this.checkbox_c,
         '--box_c':this.box_c
       }
+    }
+  },
+  methods: {
+    onClick( type ){
+      this.$emit('check-event', this.checked);
     }
   }
 }
