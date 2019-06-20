@@ -1,16 +1,21 @@
 <template>
   <div id="app">
     <div class="checkBoxList">
-      <CheckBox ref="test" @check-event="onClick($event)" class="boxsample" width="320px" title="About start" description="Starting with your OS" shadow_c="rgba(0,0,255,0.3)" circle_c="rgba(0,0,255,0.4)" checkbox_c="rgba(0,0,255,1)" box_c="rgba(0,0,255,0.8)"/>
-      <CheckBox class="boxsample" width="320px" title="Auto update" description="Download and install new version" shadow_c="rgba(50,220,40,0.3)" circle_c="rgba(50,220,40,0.4)" checkbox_c="rgba(50,220,40,1)" box_c="rgba(50,220,40,0.8)"/>
-      <CheckBox class="boxsample" width="320px" title="Don't check auth key" description="All connections will not be checked" shadow_c="rgba(255,198,0,0.3)" circle_c="rgba(255,198,0,0.4)" checkbox_c="rgba(255,198,0,1)" box_c="rgba(255,198,0,0.8)"/>
-      <CheckBox class="boxsample" width="320px" title="Success all" description="Everyone will be fine" shadow_c="rgba(255,0,0,0.3)" circle_c="rgba(255,0,0,0.4)" checkbox_c="rgba(255,0,0,1)" box_c="rgba(255,0,0,0.8)"/>
+      <CheckBox ref="test" v-model="checkData1" class="boxsample"/>
+      <CheckBox ref="test" v-model="checkData2" class="boxsample"/>
+      <CheckBox ref="test" v-model="checkData3" class="boxsample"/>
+      <CheckBox ref="test" v-model="checkData4" class="boxsample"/>
+      <div class="debug">
+        <p>checkbox1 : {{checkData1}}</p>
+        <p>checkbox2 : {{checkData2}}</p>
+        <p>checkbox3 : {{checkData3}}</p>
+        <p>checkbox4 : {{checkData4}}</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import CheckBox from './components/CheckBox.vue'
 
 export default {
@@ -20,16 +25,51 @@ export default {
   },
   data(){
     return{
+      checkData1:{
+        checked:true,
+        width:"340px",
+        title:"About start",
+        description:"Starting with your OS",
+        shadow_c:"rgba(0,0,255,0.3)",
+        circle_c:"rgba(0,0,255,0.4)",
+        checkbox_c:"rgba(0,0,255,1)",
+        box_c:"rgba(0,0,255,0.8)"
+      },
+      checkData2:{
+        checked:false,
+        width:"340px",
+        title:"Auto update",
+        description:"Download and install new version",
+        shadow_c:"rgba(50,220,40,0.3)",
+        circle_c:"rgba(50,220,40,0.4)",
+        checkbox_c:"rgba(50,220,40,1)",
+        box_c:"rgba(50,220,40,0.8)"
+      },
+      checkData3:{
+        checked:false,
+        width:"340px",
+        title:"Don't check auth key",
+        description:"All connections will not be checked",
+        shadow_c:"rgba(255,198,0,0.3)",
+        circle_c:"rgba(255,198,0,0.4)",
+        checkbox_c:"rgba(255,198,0,1)",
+        box_c:"rgba(255,198,0,0.8)"
+      },
+      checkData4:{
+        checked:false,
+        width:"340px",
+        title:"Success all",
+        description:"Everyone will be fine",
+        shadow_c:"rgba(255,0,0,0.3)",
+        circle_c:"rgba(255,0,0,0.4)",
+        checkbox_c:"rgba(255,0,0,1)",
+        box_c:"rgba(255,0,0,0.8)"
+      },
     }
   },
   mounted() {
-    this.$refs.test.data
-    console.log('value = ' + this.$refs.test.checked);
   },
   methods: {
-    onClick( type ){
-      console.log('1value = ' + this.$refs.test.checked);
-    }
   }
 }
 </script>
@@ -47,10 +87,17 @@ export default {
 .checkBoxList{
   width: 335px;
   margin: 0 auto;
-  /* display: flex; */
-  /* align-items: flex-start; */
 }
 .boxsample{
   margin-bottom: 5px;
+}
+
+.debug{
+  padding-left: 20px;
+  margin-top: 20px;
+  text-align: left;
+}
+.debug p{
+  margin-bottom: 10px;
 }
 </style>

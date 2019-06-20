@@ -1,7 +1,7 @@
 <template>
-  <div class="checkboxArea" :style="styles">
+  <div ref="checkboxArea" class="checkboxArea" :class="{checked:checked}" :style="styles">
     <label>
-      <input type='checkbox' class="checkbox" v-model="checked" @click="onClick()" />
+      <input type='checkbox' class="checkbox" v-model="checked"/>
       <div class="boxparts">
         <span class="box"></span>
       </div>
@@ -15,37 +15,45 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'CheckBox',
   data(){
     return{
-      checked: false
+      checked: false,
+      title:String,
+      description:String,
     }
   },
-  props: {
-    width: String,
-    title: String,
-    description:String,
-    shadow_c:String,
-    circle_c:String,
-    checkbox_c:String,
-    box_c:String,
+  beforeMount(){
+    console.log('beforeMounted');
+    this.boxwidth = this.value.width;
+    this.shadow_c = this.value.shadow_c;
+    this.circle_c = this.value.circle_c;
+    this.checkbox_c = this.value.checkbox_c;
+    this.box_c = this.value.box_c;
   },
+  mounted(){
+    this.checked = this.value.checked;
+    this.title = this.value.title;
+    this.description = this.value.description;
+  },
+  updated(){
+    this.$emit('input', {checked:this.checked})
+  },
+  props: ['value'],
   computed:{
+    $checkboxArea() {
+      return this.$refs.checkboxArea
+    },
     styles(){
       return{
-        '--width':this.width,
+        '--width':this.boxwidth,
         '--shadow_c':this.shadow_c,
         '--circle_c':this.circle_c,
         '--checkbox_c':this.checkbox_c,
-        '--box_c':this.box_c
+        '--box_c':this.box_c,
       }
     }
   },
-  methods: {
-    onClick( type ){
-      this.$emit('check-event', this.checked);
-    }
-  }
 }
 </script>
 
@@ -66,13 +74,15 @@ export default {
   --checkbox_c: rgba(0,0,255,0.5);
   --box_c: rgba(0,0,255,0.3);
   position: relative;
-  // display: inline-block;
   width: var(--width);
   border-radius: 4px;
   padding: 15px 20px;
+  transition: background-color .05s linear;
+  &.checked{
+    background-color: var(--circle_c);
+  }
 }
 .checkboxArea:hover{
-  // box-shadow: 0 3px 6px rgba(0,0,255,0.3);
   box-shadow: 0 2px 8px var(--shadow_c);
   .boxparts:before{
     opacity: 1;
