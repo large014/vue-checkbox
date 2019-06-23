@@ -1,5 +1,6 @@
 <template>
-  <div ref="checkboxArea" class="checkboxArea" :class="{checked:checked}" :style="styles">
+  <div ref="checkboxArea" class="checkboxArea" :class="{checked:checked}" :style="styles" @mousedown="onClick">
+    <Ripple ref="ripple" :circleC="ripple_c"/>
     <label>
       <input type='checkbox' class="checkbox" v-model="checked"/>
       <div class="boxparts">
@@ -14,22 +15,33 @@
 </template>
 
 <script>
+import Ripple from './Ripple.vue'
+
 export default {
   name: 'CheckBox',
+  components: {
+    Ripple
+  },
   data(){
     return{
       checked: false,
       title:String,
       description:String,
+      shadow_c:String,
+      circle_c:String,
+      box_c:String,
+      checkbox_c:String,
+      ripple_c:String,
     }
   },
   beforeMount(){
-    console.log('beforeMounted');
     this.boxwidth = this.value.width;
     this.shadow_c = this.value.shadow_c;
     this.circle_c = this.value.circle_c;
     this.checkbox_c = this.value.checkbox_c;
     this.box_c = this.value.box_c;
+    this.ripple_c = this.value.ripple_c;
+    this.rippleC = this.value.circle_c;
   },
   mounted(){
     this.checked = this.value.checked;
@@ -54,6 +66,13 @@ export default {
       }
     }
   },
+  methods:{
+    onClick(e){
+      if(!this.checked){
+        this.$refs.ripple.startRipple(e)
+      }
+    }
+  }
 }
 </script>
 
@@ -76,8 +95,7 @@ export default {
   position: relative;
   width: var(--width);
   border-radius: 4px;
-  padding: 15px 20px;
-  transition: background-color .05s linear;
+  transition: background-color .01s linear;
   &.checked{
     background-color: var(--circle_c);
   }
@@ -177,7 +195,8 @@ export default {
 
 .textArea{
   text-align: left;
-  padding-left: 40px;
+  padding: 13px 20px 13px 55px;
+  pointer-events: none;
 }
 
 .title{
