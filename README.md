@@ -10,7 +10,7 @@ import CheckBox from './components/CheckBox.vue'
 
 <script>
 import CheckBox from './components/CheckBox.vue'
-import Ripple from './components/Ripple.vue'
+
 export default {
   name: 'app',
   components: {
