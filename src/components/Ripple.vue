@@ -1,5 +1,5 @@
 <template>
-  <div class="ripple">
+  <div ref="ripple" class="ripple" @click="startRipple" :style="parentStyles">
      <span ref="rippleEffect" class="ripple_effect" :class="{show:isShow}" :style="styles"></span>
   </div>
 </template>
@@ -8,8 +8,8 @@
 export default {
   name: 'Ripple',
   props: {
-    msg: String,
-    circleC: String
+    circleC: String,
+    clickable : String
   },
   data(){
     return{
@@ -18,12 +18,15 @@ export default {
       targetH : 0,
       rippleW : 0,
       rippleH : 0,
+      parentStyles:{
+        "pointerEvents":"auto"
+      },
       styles:{
         "top" : "0px",
         "left": "100px",
         "width": "100px",
         "height":"100px",
-        "backgroundColor":"#000"
+        "backgroundColor":"#000",
       }
     }
   },
@@ -31,6 +34,7 @@ export default {
     this.targetH = this.$el.clientHeight;
     this.targetW = this.$el.clientWidth;
     this.styles.backgroundColor = this.circleC;
+    this.parentStyles.pointerEvents = this.clickable;
     if( this.targetW > this.targetH){
       this.styles.width = this.targetW + "px";
       this.styles.height = this.targetW + "px";
@@ -79,7 +83,7 @@ export default {
     text-align: center;
     line-height: 100px;
     cursor: pointer;
-    pointer-events: none;
+    // pointer-events: none;
 
     overflow: hidden;
     position: absolute;

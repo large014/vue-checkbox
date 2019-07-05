@@ -11,10 +11,6 @@
         <p>checkbox3 : {{checkData3}}</p>
         <p>checkbox4 : {{checkData4}}</p>
       </div>
-      <div class="rippletest" @mousedown="onClick">
-          <Ripple ref="ripple" circleC="rgba(50,220,40,0.5)"/>
-          rippleEffect Test
-      </div>
     </div>
   </div>
 </template>
@@ -78,11 +74,6 @@ export default {
   },
   mounted() {
   },
-  methods: {
-    onClick(e){
-      this.$refs.ripple.startRipple(e)
-    }
-  }
 }
 </script>
 

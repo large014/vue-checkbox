@@ -1,6 +1,6 @@
 <template>
   <div ref="checkboxArea" class="checkboxArea" :class="{checked:checked}" :style="styles" @mousedown="onClick">
-    <Ripple ref="ripple" :circleC="ripple_c"/>
+    <Ripple ref="ripple" :circleC="ripple_c" clickable="none"/>
     <label>
       <input type='checkbox' class="checkbox" v-model="checked"/>
       <div class="boxparts">
