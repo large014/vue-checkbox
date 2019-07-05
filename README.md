@@ -37,16 +37,16 @@ export default {
 }
 </script>
 ```
-dataでチェックボックスでカスタムしたいプロパティを設定して、v-modelに設定してください。
-[checked] : チェックされたかどうか
-[width] : チェックボックスのdomの長さ
-[title] : タイトル
-[description] : 補足説明
-[shadow_c] : 領域全体のシャドウ色
-[circle_c] : チェックボックスのサークル色
-[checkbox_c] : チェックボックスの色
-[ripple_c] : クリックした際のエフェクト色
-[box_c] : セレクト状態の領域の背景色
+dataでチェックボックスでカスタムしたいプロパティを設定して、v-modelに設定してください。  
+[checked] : チェックされたかどうか  
+[width] : チェックボックスのdomの長さ  
+[title] : タイトル  
+[description] : 補足説明  
+[shadow_c] : 領域全体のシャドウ色  
+[circle_c] : チェックボックスのサークル色  
+[checkbox_c] : チェックボックスの色  
+[ripple_c] : クリックした際のエフェクト色  
+[box_c] : セレクト状態の領域の背景色  
 
 ### Compiles and hot-reloads for development
 ```
